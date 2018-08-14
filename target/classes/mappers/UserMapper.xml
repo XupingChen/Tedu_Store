@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.UserMapper">
+	<!-- void insertUser(User user); -->
+	<insert id="insertUser" parameterType="cn.tedu.store.bean.User">
+		insert into 
+			t_user(username,password,email,phone,gender,image,created_user,created_time,modified_user,modified_time)
+		values(
+			#{username},#{password},#{email},#{phone},#{gender},#{image},#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime}
+		)
+	</insert>
+	<!-- User seleceByUsername(String username); -->
+	<select id="selectByUsername" resultType="cn.tedu.store.bean.User">
+		select 
+			id,username,password,email,phone,gender,image,created_user createdUser,created_time createdTime,modified_user modifiedUser,modified_time modifiedTime
+		from 
+			t_user
+		where
+			username=#{username} 	
+	</select>
+	<!-- Integer selectByEmail(String Email); -->
+	<select id="selectByEmail" resultType="java.lang.Integer">
+		select count(*) from t_user where email=#{email}
+	</select>
+	<!-- Integer selectByPhone(String phone); -->
+	<select id="selectByPhone" resultType="java.lang.Integer">
+		select count(*) from t_user where phone=#{phone};
+	</select>
+</mapper>
